@@ -19,20 +19,7 @@ public class BallBehavior : MonoBehaviour
     }
     void Update()
     {
-        if (transform.position == _finalState) // Возвращаем исходные координаты начальной и конечной точек + меняем флаг
-        {
-            _tempFinal = _startState;
-            _tempStart = _finalState;
-            _ballMovementDirection = false;
-            _currentTime = 0;
-        }
-        if (transform.position == _startState) // Возвращаем исходные координаты начальной и конечной точек + меняем флаг
-        {
-            _tempFinal = _finalState;
-            _tempStart = _startState;
-            _ballMovementDirection = true;
-            _currentTime = 0;
-        }
+        CheckBallPosition(); // Возвращаем исходные координаты начальной и конечной точек + меняем флаг
         _currentTime += Time.deltaTime;
         var distance = Vector3.Distance(_tempStart, _tempFinal);
         var travelTime = distance / _speed;
@@ -59,8 +46,24 @@ public class BallBehavior : MonoBehaviour
             } 
             transform.position = Vector2.Lerp(_tempStart,  _tempFinal, progress);
         }
-         
-       
+
+        void CheckBallPosition()
+        {
+            if (transform.position == _finalState) 
+            {
+                _tempFinal = _startState;
+                _tempStart = _finalState;
+                _ballMovementDirection = false;
+                _currentTime = 0;
+            }
+            if (transform.position == _startState) 
+            {
+                _tempFinal = _finalState;
+                _tempStart = _startState;
+                _ballMovementDirection = true;
+                _currentTime = 0;
+            }
+        }
         
-}
+    }
 }
