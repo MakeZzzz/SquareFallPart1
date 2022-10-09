@@ -34,36 +34,38 @@ public class BallBehavior : MonoBehaviour
         {
             _currentTime = 0;
             _tempStart = transform.position; // Будем двигаться от текущей позиции шара
-            if (_ballMovementDirection) // Проверка, в какую сторону двигается шар для установления конечной точки
-            {
-                _tempFinal = _startState;
-                _ballMovementDirection = false;
-            }
-            else
-            {
-                _tempFinal = _finalState;
-                _ballMovementDirection = true;
-            } 
+            CheckBallDirection(); // Проверка, в какую сторону двигается шар для установления конечной точки
             transform.position = Vector2.Lerp(_tempStart,  _tempFinal, progress);
         }
-
-        void CheckBallPosition()
+    }
+    private void CheckBallPosition()
+    {
+        if (transform.position == _finalState) 
         {
-            if (transform.position == _finalState) 
-            {
-                _tempFinal = _startState;
-                _tempStart = _finalState;
-                _ballMovementDirection = false;
-                _currentTime = 0;
-            }
-            if (transform.position == _startState) 
-            {
-                _tempFinal = _finalState;
-                _tempStart = _startState;
-                _ballMovementDirection = true;
-                _currentTime = 0;
-            }
+            _tempFinal = _startState;
+            _tempStart = _finalState;
+            _ballMovementDirection = false;
+            _currentTime = 0;
         }
-        
+        if (transform.position == _startState) 
+        {
+            _tempFinal = _finalState;
+            _tempStart = _startState;
+            _ballMovementDirection = true;
+            _currentTime = 0;
+        }
+    }
+    private void CheckBallDirection()
+    {
+        if (_ballMovementDirection)
+        {
+            _tempFinal = _startState;
+            _ballMovementDirection = false;
+        }
+        else
+        {
+            _tempFinal = _finalState;
+            _ballMovementDirection = true;
+        }      
     }
 }
