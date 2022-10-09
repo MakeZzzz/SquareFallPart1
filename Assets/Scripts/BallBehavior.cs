@@ -19,7 +19,7 @@ public class BallBehavior : MonoBehaviour
     }
     void Update()
     {
-        CheckBallPosition(); // Возвращаем исходные координаты начальной и конечной точек + меняем флаг
+        CheckBallPosition(); // Если координаты совпадают- возвращаем исходные координаты начальной и конечной точек + меняем флаг
         _currentTime += Time.deltaTime;
         var distance = Vector3.Distance(_tempStart, _tempFinal);
         var travelTime = distance / _speed;
