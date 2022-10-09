@@ -12,12 +12,14 @@ public class BallBehavior : MonoBehaviour
     private Vector3 _tempStart;
     private Vector3 _tempFinal;
     private bool _ballMovementDirection = true; // true - шар идет вправо, false - влево
+    
     private void Start()
     {
         _tempStart = _startState;
         _tempFinal = _finalState;
     }
-    void Update()
+    
+    private void Update()
     {
         if (transform.position == _finalState) // Возвращаем исходные координаты начальной и конечной точек + меняем флаг
         {
